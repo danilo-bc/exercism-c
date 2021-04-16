@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <ctype.h>
 
 bool is_isogram(const char phrase[]);
 
