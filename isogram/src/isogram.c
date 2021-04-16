@@ -4,13 +4,19 @@
 bool is_isogram(const char phrase[]){
     if(phrase == NULL) //NULL pointers return false
         return false;
-
+        
+    // Supposing all letters are in the English alphabet
+    bool letter_present[26] = {false};
     for(size_t i = 0; phrase[i] != '\0'; i++){ //Traverse string until null '\0' char
-        for(size_t j = i+1; phrase[j] != '\0'; j++){
-            if(isalpha((unsigned char) phrase[j])){ // check if is a letter
-                if(phrase[i] == tolower((unsigned char) phrase[j]) || phrase[i] == toupper((unsigned char) phrase[j])){
-                    return false;
-                }
+        if(isalpha((unsigned char) phrase[i])){ // Check if it's a letter
+            // use letter_present to check if it was already found
+            // if true, return false (not isogram)
+            // if false, turn into true and carry the search
+            if(letter_present[(unsigned char) tolower(phrase[i]) - 'a']){
+                return false;
+            }
+            else{
+                letter_present[(unsigned char) tolower(phrase[i]) - 'a'] = true;
             }
         }
     }
